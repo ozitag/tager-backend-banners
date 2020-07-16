@@ -8,6 +8,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['passport:administrators', '
     Route::get('/banners', \OZiTAG\Tager\Backend\Banners\Controllers\AdminController::class . '@index');
     Route::post('/banners', \OZiTAG\Tager\Backend\Banners\Controllers\AdminController::class . '@create');
     Route::get('/banners/{id}', \OZiTAG\Tager\Backend\Banners\Controllers\AdminController::class . '@view');
+    Route::get('/banners/{alias}', \OZiTAG\Tager\Backend\Banners\Controllers\AdminController::class . '@viewByAlias');
     Route::put('/banners/{id}', \OZiTAG\Tager\Backend\Banners\Controllers\AdminController::class . '@update');
     Route::delete('/banners/{id}', \OZiTAG\Tager\Backend\Banners\Controllers\AdminController::class . '@delete');
 });

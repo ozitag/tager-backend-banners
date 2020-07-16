@@ -1,6 +1,6 @@
 <?php
 
-namespace OZiTAG\Tager\Backend\Menus;
+namespace OZiTAG\Tager\Backend\Banners;
 
 use Illuminate\Support\ServiceProvider;
 use Kalnoy\Nestedset\NestedSetServiceProvider;

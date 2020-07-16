@@ -27,7 +27,7 @@ class FlushBannersCommand extends Command
 
     public function handle(BannerAreasRepository $repository)
     {
-        $areas = config()->get('tager-banners.area');
+        $areas = config()->get('tager-banners.areas');
         if (!$areas) {
             return;
         }

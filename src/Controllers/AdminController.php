@@ -3,6 +3,7 @@
 namespace OZiTAG\Tager\Backend\Banners\Controllers;
 
 use OZiTAG\Tager\Backend\Core\Controller;
+use OZiTAG\Tager\Backend\Banners\Features\Admin\ViewBannerAreaByAliasFeature;
 use OZiTAG\Tager\Backend\Banners\Features\Admin\ViewBannerAreaFeature;
 use OZiTAG\Tager\Backend\Banners\Features\Admin\CreateBannerAreaFeature;
 use OZiTAG\Tager\Backend\Banners\Features\Admin\ListBannerAreaFeature;
@@ -25,6 +26,13 @@ class AdminController extends Controller
     {
         return $this->serve(ViewBannerAreaFeature::class, [
             'id' => $id
+        ]);
+    }
+
+    public function viewByAlias($alias)
+    {
+        return $this->serve(ViewBannerAreaByAliasFeature::class, [
+            'alias' => $alias
         ]);
     }
 
