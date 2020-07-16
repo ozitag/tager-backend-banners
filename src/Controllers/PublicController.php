@@ -7,7 +7,7 @@ use OZiTAG\Tager\Backend\Banners\Features\Guest\ViewBannerFeature;
 
 class PublicController extends Controller
 {
-    public function menu($alias)
+    public function banner($alias)
     {
         return $this->serve(ViewBannerFeature::class, [
             'alias' => $alias

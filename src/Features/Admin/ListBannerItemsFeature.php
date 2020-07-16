@@ -2,7 +2,11 @@
 
 namespace OZiTAG\Tager\Backend\Banners\Features\Admin;
 
+use OZiTAG\Tager\Backend\Banners\Jobs\GetBannerAreaByIdJob;
+use OZiTAG\Tager\Backend\Banners\Repositories\BannersRepository;
 use OZiTAG\Tager\Backend\Banners\Requests\BannerRequest;
+use OZiTAG\Tager\Backend\Banners\Resources\BannerResource;
+use OZiTAG\Tager\Backend\Blog\Resources\Admin\AdminPostResource;
 use OZiTAG\Tager\Backend\Core\Feature;
 use OZiTAG\Tager\Backend\Core\SuccessResource;
 
@@ -15,8 +19,12 @@ class ListBannerItemsFeature extends Feature
         $this->areaId = $areaId;
     }
 
-    public function handle()
+    public function handle(BannersRepository $repository)
     {
-        return new SuccessResource();
+        $bannerArea = $this->run(GetBannerAreaByIdJob::class, ['id' => $this->areaId]);
+
+        $bannersCollection = $repository->findByBannerArea($bannerArea->id);
+
+        return BannerResource::collection($bannersCollection);
     }
 }

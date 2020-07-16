@@ -12,10 +12,10 @@ class BannerRequest extends FormRequest
         return [
             'title' => 'nullable|string',
             'text' => 'nullable|string',
+            'image' => ['nullable', 'numeric', new FileRule()],
             'buttonLink' => 'nullable|string',
             'buttonLabel' => 'nullable|string',
             'buttonIsNewTab' => 'nullable|boolean',
-            'image' => 'nullable|number',
         ];
     }
 }

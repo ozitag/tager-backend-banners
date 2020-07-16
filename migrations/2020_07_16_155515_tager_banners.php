@@ -32,7 +32,7 @@ class TagerBanners extends Migration
 
             $table->text('title')->nullable();
             $table->text('text')->nullable();
-            $table->unsignedBigInteger('image_id');
+            $table->unsignedBigInteger('image_id')->nullable();
             $table->text('button_label')->nullable();
             $table->text('button_link')->nullable();
             $table->boolean('button_is_new_tab')->default(false);

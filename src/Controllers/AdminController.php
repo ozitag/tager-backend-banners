@@ -2,12 +2,13 @@
 
 namespace OZiTAG\Tager\Backend\Banners\Controllers;
 
+use OZiTAG\Tager\Backend\Banners\Features\Admin\ViewBannerItemFeature;
+use OZiTAG\Tager\Backend\Core\Controller;
 use OZiTAG\Tager\Backend\Banners\Features\Admin\CreateBannerItemFeature;
 use OZiTAG\Tager\Backend\Banners\Features\Admin\ListBannerItemsFeature;
 use OZiTAG\Tager\Backend\Banners\Features\Admin\MoveBannerItemFeature;
 use OZiTAG\Tager\Backend\Banners\Features\Admin\RemoveBannerItemFeature;
 use OZiTAG\Tager\Backend\Banners\Features\Admin\UpdateBannerItemFeature;
-use OZiTAG\Tager\Backend\Core\Controller;
 use OZiTAG\Tager\Backend\Banners\Features\Admin\ViewBannerAreaByAliasFeature;
 use OZiTAG\Tager\Backend\Banners\Features\Admin\ViewBannerAreaFeature;
 use OZiTAG\Tager\Backend\Banners\Features\Admin\CreateBannerAreaFeature;
@@ -66,6 +67,13 @@ class AdminController extends Controller
     {
         return $this->serve(CreateBannerItemFeature::class, [
             'areaId' => $id
+        ]);
+    }
+
+    public function viewItem($id)
+    {
+        return $this->serve(ViewBannerItemFeature::class, [
+            'id' => $id
         ]);
     }
 

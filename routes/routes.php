@@ -16,7 +16,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['passport:administrators', '
     Route::post('/banners/{id}/items', \OZiTAG\Tager\Backend\Banners\Controllers\AdminController::class . '@createItem');
     Route::get('/banners/items/{id}', \OZiTAG\Tager\Backend\Banners\Controllers\AdminController::class . '@viewItem');
     Route::put('/banners/items/{id}', \OZiTAG\Tager\Backend\Banners\Controllers\AdminController::class . '@updateItem');
-    Route::delete('/banners/items/{id}', \OZiTAG\Tager\Backend\Banners\Controllers\AdminController::class . '@deleteItem');
+    Route::delete('/banners/items/{id}', \OZiTAG\Tager\Backend\Banners\Controllers\AdminController::class . '@removeItem');
     Route::post('/banners/items/{id}/{direction}', \OZiTAG\Tager\Backend\Banners\Controllers\AdminController::class . '@moveItem')
         ->where('direction', 'up|down');
 });

@@ -3,6 +3,7 @@
 namespace OZiTAG\Tager\Backend\Banners\Features\Admin;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use OZiTAG\Tager\Backend\Banners\Jobs\GetBannerByIdJob;
 use OZiTAG\Tager\Backend\Core\Feature;
 use OZiTAG\Tager\Backend\Core\SuccessResource;
 use OZiTAG\Tager\Backend\Banners\Jobs\GetBannerAreaByIdJob;
@@ -19,6 +20,10 @@ class RemoveBannerItemFeature extends Feature
 
     public function handle()
     {
+        $model = $this->run(GetBannerByIdJob::class, ['id' => $this->id]);
+
+        $model->delete();
+
         return new SuccessResource();
     }
 }
