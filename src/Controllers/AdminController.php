@@ -2,6 +2,11 @@
 
 namespace OZiTAG\Tager\Backend\Banners\Controllers;
 
+use OZiTAG\Tager\Backend\Banners\Features\Admin\CreateBannerItemFeature;
+use OZiTAG\Tager\Backend\Banners\Features\Admin\ListBannerItemsFeature;
+use OZiTAG\Tager\Backend\Banners\Features\Admin\MoveBannerItemFeature;
+use OZiTAG\Tager\Backend\Banners\Features\Admin\RemoveBannerItemFeature;
+use OZiTAG\Tager\Backend\Banners\Features\Admin\UpdateBannerItemFeature;
 use OZiTAG\Tager\Backend\Core\Controller;
 use OZiTAG\Tager\Backend\Banners\Features\Admin\ViewBannerAreaByAliasFeature;
 use OZiTAG\Tager\Backend\Banners\Features\Admin\ViewBannerAreaFeature;
@@ -47,6 +52,42 @@ class AdminController extends Controller
     {
         return $this->serve(RemoveBannerAreaFeature::class, [
             'id' => $id
+        ]);
+    }
+
+    public function listItems($id)
+    {
+        return $this->serve(ListBannerItemsFeature::class, [
+            'areaId' => $id
+        ]);
+    }
+
+    public function createItem($id)
+    {
+        return $this->serve(CreateBannerItemFeature::class, [
+            'areaId' => $id
+        ]);
+    }
+
+    public function updateItem($id)
+    {
+        return $this->serve(UpdateBannerItemFeature::class, [
+            'id' => $id
+        ]);
+    }
+
+    public function removeItem($id)
+    {
+        return $this->serve(RemoveBannerItemFeature::class, [
+            'id' => $id
+        ]);
+    }
+
+    public function moveItem($id, $direction)
+    {
+        return $this->serve(MoveBannerItemFeature::class, [
+            'id' => $id,
+            'direction' => $direction,
         ]);
     }
 }

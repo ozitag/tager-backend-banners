@@ -11,4 +11,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['passport:administrators', '
     Route::get('/banners/{alias}', \OZiTAG\Tager\Backend\Banners\Controllers\AdminController::class . '@viewByAlias');
     Route::put('/banners/{id}', \OZiTAG\Tager\Backend\Banners\Controllers\AdminController::class . '@update');
     Route::delete('/banners/{id}', \OZiTAG\Tager\Backend\Banners\Controllers\AdminController::class . '@delete');
+
+    Route::get('/banners/{id}/items', \OZiTAG\Tager\Backend\Banners\Controllers\AdminController::class . '@listItems');
+    Route::post('/banners/{id}/items', \OZiTAG\Tager\Backend\Banners\Controllers\AdminController::class . '@createItem');
+    Route::get('/banners/items/{id}', \OZiTAG\Tager\Backend\Banners\Controllers\AdminController::class . '@viewItem');
+    Route::put('/banners/items/{id}', \OZiTAG\Tager\Backend\Banners\Controllers\AdminController::class . '@updateItem');
+    Route::delete('/banners/items/{id}', \OZiTAG\Tager\Backend\Banners\Controllers\AdminController::class . '@deleteItem');
+    Route::post('/banners/items/{id}/{direction}', \OZiTAG\Tager\Backend\Banners\Controllers\AdminController::class . '@moveItem')
+        ->where('direction', 'up|down');
 });
