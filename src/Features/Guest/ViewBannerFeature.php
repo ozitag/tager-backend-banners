@@ -4,6 +4,7 @@ namespace OZiTAG\Tager\Backend\Banners\Features\Guest;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use OZiTAG\Tager\Backend\Banners\Repositories\BannersRepository;
+use OZiTAG\Tager\Backend\Banners\Resources\BannerPublicResource;
 use OZiTAG\Tager\Backend\Banners\Resources\BannerResource;
 use OZiTAG\Tager\Backend\Core\Feature;
 use OZiTAG\Tager\Backend\Banners\Jobs\GetBannerAreaByAliasJob;
@@ -26,6 +27,6 @@ class ViewBannerFeature extends Feature
 
         $collection = $repository->findByBannerArea($model->id);
 
-        return BannerResource::collection($collection);
+        return BannerPublicResource::collection($collection);
     }
 }

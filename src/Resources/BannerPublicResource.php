@@ -8,7 +8,7 @@ use OZiTAG\Tager\Backend\Mail\Models\TagerMailTemplate;
 use OZiTAG\Tager\Backend\Mail\Utils\TagerMailConfig;
 use OZiTAG\Tager\Backend\Seo\Models\SeoPage;
 
-class BannerResource extends JsonResource
+class BannerPublicResource extends JsonResource
 {
     public function toArray($request)
     {
@@ -16,7 +16,7 @@ class BannerResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'text' => $this->text,
-            'image' => $this->image ? $this->image->getUrl() : null,
+            'image' => $this->image ? $this->image->getFullJson() : null,
             'buttonLabel' => $this->button_label,
             'buttonLink' => $this->button_link,
             'buttonIsNewTab' => (boolean)$this->button_is_new_tab

@@ -5,6 +5,7 @@ namespace OZiTAG\Tager\Backend\Banners\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Kalnoy\Nestedset\NodeTrait;
+use Ozerich\FileStorage\Models\File;
 
 class TagerBanner extends Model
 {
@@ -31,6 +32,11 @@ class TagerBanner extends Model
     public function area()
     {
         return $this->belongsTo(TagerBannerArea::class, 'banner_area_id');
+    }
+
+    public function image()
+    {
+        return $this->belongsTo(File::class, 'image_id');
     }
 
     protected static function boot()
