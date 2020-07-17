@@ -36,7 +36,7 @@ class UpdateBannerJob
         $this->image = $image;
     }
 
-    public function handle(BannersRepository $repository, FileRepository $fileRepository, Storage $fileStorage)
+    public function handle(FileRepository $fileRepository, Storage $fileStorage)
     {
         if ($this->model->image_id != $this->image) {
             $fileModel = $fileRepository->find($this->image);
@@ -44,7 +44,7 @@ class UpdateBannerJob
             if (!$fileModel) {
                 $this->image = null;
             } elseif ($this->model->area->scenario) {
-                $fileStorage->setFileScenario($this->image, $this->area->scenario);
+                $fileStorage->setFileScenario($this->image, $this->model->area->scenario);
             }
         }
 
