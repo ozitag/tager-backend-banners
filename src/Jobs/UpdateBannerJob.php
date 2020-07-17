@@ -3,21 +3,10 @@
 namespace OZiTAG\Tager\Backend\Banners\Jobs;
 
 use Ozerich\FileStorage\Models\File;
+use Ozerich\FileStorage\Repositories\FileRepository;
+use Ozerich\FileStorage\Storage;
 use OZiTAG\Tager\Backend\Banners\Models\TagerBanner;
-use OZiTAG\Tager\Backend\Banners\Models\TagerBannerArea;
 use OZiTAG\Tager\Backend\Banners\Repositories\BannersRepository;
-use OZiTAG\Tager\Backend\Core\QueueJob;
-use OZiTAG\Tager\Backend\Mail\Enums\TagerMailStatus;
-use OZiTAG\Tager\Backend\Mail\Exceptions\TagerMailSenderException;
-use OZiTAG\Tager\Backend\Mail\Models\TagerMailLog;
-use App\Models\Product;
-use App\Repositories\Interfaces\IProductReviewRepository;
-use OZiTAG\Tager\Backend\Mail\Repositories\MailLogRepository;
-use OZiTAG\Tager\Backend\Mail\Senders\SenderFactory;
-use OZiTAG\Tager\Backend\Mail\Utils\TagerMailAttachments;
-use OZiTAG\Tager\Backend\Mail\Utils\TagerMailConfig;
-use OZiTAG\Tager\Backend\Mail\Utils\TagerMailSender;
-use OZiTAG\Tager\Backend\Banners\Repositories\BannerAreasRepository;
 
 class UpdateBannerJob
 {
@@ -47,16 +36,26 @@ class UpdateBannerJob
         $this->image = $image;
     }
 
-    public function handle(BannersRepository $repository)
+    public function handle(BannersRepository $repository, FileRepository $fileRepository, Storage $fileStorage)
     {
-        return $repository->update([
-            'id' => $this->model->id,
-            'title' => $this->title,
-            'text' => $this->text,
-            'button_link' => $this->buttonLink,
-            'button_label' => $this->buttonLabel,
-            'button_is_new_tab' => $this->buttonIsNewTab,
-            'image_id' => $this->image ? $this->image->id : null
-        ]);
+        if ($this->model->image_id != $this->image) {
+            $fileModel = $fileRepository->find($this->image);
+
+            if (!$fileModel) {
+                $this->image = null;
+            } elseif ($this->model->area->scenario) {
+                $fileStorage->setFileScenario($this->image, $this->area->scenario);
+            }
+        }
+
+        $this->model->title = $this->title;
+        $this->model->text = $this->text;
+        $this->model->button_link = $this->buttonLink;
+        $this->model->button_label = $this->buttonLabel;
+        $this->model->button_is_new_tab = $this->buttonIsNewTab;
+        $this->model->image_id = $this->image;
+        $this->model->save();
+
+        return $this->model;
     }
 }

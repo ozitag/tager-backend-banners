@@ -28,6 +28,11 @@ class TagerBanner extends Model
         'button_is_new_tab',
     ];
 
+    public function area()
+    {
+        return $this->belongsTo(TagerBannerArea::class, 'banner_area_id');
+    }
+
     protected static function boot()
     {
         parent::boot();

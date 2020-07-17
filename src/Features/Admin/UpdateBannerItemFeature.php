@@ -4,6 +4,7 @@ namespace OZiTAG\Tager\Backend\Banners\Features\Admin;
 
 use OZiTAG\Tager\Backend\Banners\Jobs\CreateBannerJob;
 use OZiTAG\Tager\Backend\Banners\Jobs\GetBannerByIdJob;
+use OZiTAG\Tager\Backend\Banners\Jobs\UpdateBannerJob;
 use OZiTAG\Tager\Backend\Banners\Requests\BannerRequest;
 use OZiTAG\Tager\Backend\Banners\Resources\BannerResource;
 use OZiTAG\Tager\Backend\Core\Feature;
@@ -24,7 +25,7 @@ class UpdateBannerItemFeature extends Feature
             'id' => $this->id
         ]);
 
-        $model = $this->run(CreateBannerJob::class, [
+        $model = $this->run(UpdateBannerJob::class, [
             'model' => $model,
             'title' => $request->title,
             'text' => $request->text,
