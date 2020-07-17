@@ -14,17 +14,21 @@ class UpdateBannerAreaJob
 
     private $label;
 
-    public function __construct(TagerBannerArea $model, $alias, $label)
+    private $scenario;
+
+    public function __construct(TagerBannerArea $model, $alias, $label, $scenario)
     {
         $this->model = $model;
         $this->alias = $alias;
         $this->label = $label;
+        $this->scenario = $scenario;
     }
 
     public function handle()
     {
         $this->model->alias = $this->alias;
         $this->model->label = $this->label;
+        $this->model->scenario = $this->scenario;
         $this->model->save();
 
         return $this->model;

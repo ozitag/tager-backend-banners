@@ -21,17 +21,21 @@ class CreateBannerAreaJob
 
     private $label;
 
-    public function __construct($alias, $label)
+    private $scenario;
+
+    public function __construct($alias, $label, $scenario)
     {
         $this->alias = $alias;
         $this->label = $label;
+        $this->scenario = $scenario;
     }
 
     public function handle(BannerAreasRepository $repository)
     {
         return $repository->create([
             'alias' => $this->alias,
-            'label' => $this->label
+            'label' => $this->label,
+            'scenario' => $this->scenario
         ]);
     }
 }

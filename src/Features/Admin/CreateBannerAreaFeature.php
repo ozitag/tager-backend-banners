@@ -14,6 +14,7 @@ class CreateBannerAreaFeature extends Feature
         $model = $this->run(CreateBannerAreaJob::class, [
             'alias' => $request->alias,
             'label' => $request->label,
+            'scenario' => $request->scenario,
         ]);
 
         return new BannerAreaResource($model);

@@ -11,6 +11,7 @@ class BannerAreaRequest extends FormRequest
     {
         return [
             'label' => 'required|string',
+            'scenario' => 'nullable|string',
             'alias' => ['string', 'required', 'unique:tager_banner_areas,alias,' . $this->route('id')]
         ];
     }

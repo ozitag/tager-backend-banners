@@ -3,8 +3,11 @@
 namespace OZiTAG\Tager\Backend\Banners\Jobs;
 
 use Ozerich\FileStorage\Models\File;
+use Ozerich\FileStorage\Repositories\FileRepository;
+use Ozerich\FileStorage\Storage;
 use OZiTAG\Tager\Backend\Banners\Models\TagerBannerArea;
 use OZiTAG\Tager\Backend\Banners\Repositories\BannersRepository;
+use OZiTAG\Tager\Backend\Blog\TagerBlogConfig;
 use OZiTAG\Tager\Backend\Core\QueueJob;
 use OZiTAG\Tager\Backend\Mail\Enums\TagerMailStatus;
 use OZiTAG\Tager\Backend\Mail\Exceptions\TagerMailSenderException;
@@ -49,8 +52,18 @@ class CreateBannerJob
         $this->image = $image;
     }
 
-    public function handle(BannersRepository $repository)
+    public function handle(BannersRepository $repository, Storage $fileStorage, FileRepository $fileRepository)
     {
+        if ($this->image) {
+            $fileModel = $fileRepository->find($this->image);
+
+            if (!$fileModel) {
+                $this->image = null;
+            } elseif ($this->area->scenario) {
+                $fileStorage->setFileScenario($this->image, $this->area->scenario);
+            }
+        }
+
         return $repository->create([
             'banner_area_id' => $this->area->id,
             'priority' => $this->priority,
@@ -59,7 +72,7 @@ class CreateBannerJob
             'button_link' => $this->buttonLink,
             'button_label' => $this->buttonLabel,
             'button_is_new_tab' => $this->buttonIsNewTab,
-            'image_id' => $this->image ? $this->image->id : null
+            'image_id' => $this->image
         ]);
     }
 }

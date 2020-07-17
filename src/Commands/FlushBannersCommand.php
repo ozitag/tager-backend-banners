@@ -32,7 +32,15 @@ class FlushBannersCommand extends Command
             return;
         }
 
-        foreach ($areas as $alias => $label) {
+        foreach ($areas as $alias => $area) {
+            if (is_string($area)) {
+                $label = $area;
+                $scenario = null;
+            } else {
+                $label = $area['label'] ?? null;
+                $scenario = $area['scenario'] ?? null;
+            }
+
             $model = $repository->findByAlias($alias);
 
             if (!$model) {
@@ -40,7 +48,9 @@ class FlushBannersCommand extends Command
                 $model->alias = $alias;
             }
 
+            $model->scenario = $scenario;
             $model->label = $label;
+
             $model->save();
         }
     }

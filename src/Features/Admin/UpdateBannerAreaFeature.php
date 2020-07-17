@@ -25,7 +25,8 @@ class UpdateBannerAreaFeature extends Feature
         $model = $this->run(UpdateBannerAreaJob::class, [
             'model' => $model,
             'alias' => $request->alias,
-            'label' => $request->label
+            'label' => $request->label,
+            'scenario' => $request->scenario,
         ]);
 
         return new BannerAreaResource($model);

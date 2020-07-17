@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class TagerBannerArea extends Model
 {
     use SoftDeletes;
-    
+
     public $timestamps = false;
 
     protected $table = 'tager_banner_areas';
@@ -20,6 +20,7 @@ class TagerBannerArea extends Model
      */
     protected $fillable = [
         'alias',
-        'label'
+        'label',
+        'scenario'
     ];
 }
