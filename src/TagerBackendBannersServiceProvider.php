@@ -2,10 +2,10 @@
 
 namespace OZiTAG\Tager\Backend\Banners;
 
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider;
+use Illuminate\Support\ServiceProvider;
 use OZiTAG\Tager\Backend\Banners\Commands\FlushBannersCommand;
 
-class TagerBackendBannersServiceProvider extends RouteServiceProvider
+class TagerBackendBannersServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
@@ -37,7 +37,5 @@ class TagerBackendBannersServiceProvider extends RouteServiceProvider
                 FlushBannersCommand::class,
             ]);
         }
-
-        parent::boot();
     }
 }
