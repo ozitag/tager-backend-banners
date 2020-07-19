@@ -2,13 +2,10 @@
 
 namespace OZiTAG\Tager\Backend\Banners;
 
-use Illuminate\Support\ServiceProvider;
-use Kalnoy\Nestedset\NestedSetServiceProvider;
-use OZiTAG\Tager\Backend\Mail\Commands\FlushMailTemplatesCommand;
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider;
 use OZiTAG\Tager\Backend\Banners\Commands\FlushBannersCommand;
-use OZiTAG\Tager\Backend\Settings\Commands\FlushSettingsCommand;
 
-class TagerBackendBannersServiceProvider extends ServiceProvider
+class TagerBackendBannersServiceProvider extends RouteServiceProvider
 {
     /**
      * Register any application services.
@@ -40,5 +37,7 @@ class TagerBackendBannersServiceProvider extends ServiceProvider
                 FlushBannersCommand::class,
             ]);
         }
+
+        parent::boot();
     }
 }
