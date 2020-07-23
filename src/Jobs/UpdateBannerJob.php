@@ -5,10 +5,10 @@ namespace OZiTAG\Tager\Backend\Banners\Jobs;
 use Ozerich\FileStorage\Models\File;
 use Ozerich\FileStorage\Repositories\FileRepository;
 use Ozerich\FileStorage\Storage;
+use OZiTAG\Tager\Backend\Core\Jobs\Job;
 use OZiTAG\Tager\Backend\Banners\Models\TagerBanner;
-use OZiTAG\Tager\Backend\Banners\Repositories\BannersRepository;
 
-class UpdateBannerJob
+class UpdateBannerJob extends Job
 {
     private $model;
 

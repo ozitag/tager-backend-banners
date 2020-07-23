@@ -2,7 +2,7 @@
 
 namespace OZiTAG\Tager\Backend\Banners\Features\Admin;
 
-use OZiTAG\Tager\Backend\Core\Feature;
+use OZiTAG\Tager\Backend\Core\Features\Feature;
 use OZiTAG\Tager\Backend\Banners\Jobs\CreateBannerAreaJob;
 use OZiTAG\Tager\Backend\Banners\Requests\BannerAreaRequest;
 use OZiTAG\Tager\Backend\Banners\Resources\BannerAreaResource;

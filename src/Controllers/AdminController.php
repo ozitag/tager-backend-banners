@@ -2,8 +2,8 @@
 
 namespace OZiTAG\Tager\Backend\Banners\Controllers;
 
+use OZiTAG\Tager\Backend\Core\Controllers\Controller;
 use OZiTAG\Tager\Backend\Banners\Features\Admin\ViewBannerItemFeature;
-use OZiTAG\Tager\Backend\Core\Controller;
 use OZiTAG\Tager\Backend\Banners\Features\Admin\CreateBannerItemFeature;
 use OZiTAG\Tager\Backend\Banners\Features\Admin\ListBannerItemsFeature;
 use OZiTAG\Tager\Backend\Banners\Features\Admin\MoveBannerItemFeature;

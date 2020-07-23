@@ -2,11 +2,10 @@
 
 namespace OZiTAG\Tager\Backend\Banners\Jobs;
 
-use OZiTAG\Tager\Backend\Core\QueueJob;
+use OZiTAG\Tager\Backend\Core\Jobs\Job;
 use OZiTAG\Tager\Backend\Banners\Models\TagerBannerArea;
-use OZiTAG\Tager\Backend\Banners\Repositories\BannerAreasRepository;
 
-class UpdateBannerAreaJob
+class UpdateBannerAreaJob extends Job
 {
     private $model;
 

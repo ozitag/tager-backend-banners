@@ -4,7 +4,6 @@ namespace OZiTAG\Tager\Backend\Banners\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Kalnoy\Nestedset\NodeTrait;
 use Ozerich\FileStorage\Models\File;
 
 class TagerBanner extends Model

@@ -7,7 +7,7 @@ use OZiTAG\Tager\Backend\Banners\Jobs\GetBannerAreaByIdJob;
 use OZiTAG\Tager\Backend\Banners\Jobs\GetPriorityForNewBannerJob;
 use OZiTAG\Tager\Backend\Banners\Requests\BannerRequest;
 use OZiTAG\Tager\Backend\Banners\Resources\BannerResource;
-use OZiTAG\Tager\Backend\Core\Feature;
+use OZiTAG\Tager\Backend\Core\Features\Feature;
 use OZiTAG\Tager\Backend\Core\SuccessResource;
 use OZiTAG\Tager\Backend\Menus\Jobs\CreateMenuJob;
 

@@ -2,11 +2,10 @@
 
 namespace OZiTAG\Tager\Backend\Banners\Jobs;
 
+use OZiTAG\Tager\Backend\Core\Jobs\Job;
 use OZiTAG\Tager\Backend\Banners\Repositories\BannersRepository;
-use App\Models\Product;
-use App\Repositories\Interfaces\IProductReviewRepository;
 
-class GetBannerByIdJob
+class GetBannerByIdJob extends Job
 {
     private $id;
 

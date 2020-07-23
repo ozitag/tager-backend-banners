@@ -2,9 +2,7 @@
 
 namespace OZiTAG\Tager\Backend\Banners\Repositories;
 
-use OZiTAG\Tager\Backend\Blog\Models\BlogCategory;
 use OZiTAG\Tager\Backend\Core\Repositories\EloquentRepository;
-use OZiTAG\Tager\Backend\Banners\Models\TagerBannerArea;
 use OZiTAG\Tager\Backend\Banners\Models\TagerBanner;
 
 class BannersRepository extends EloquentRepository

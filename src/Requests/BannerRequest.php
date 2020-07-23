@@ -3,7 +3,7 @@
 namespace OZiTAG\Tager\Backend\Banners\Requests;
 
 use Ozerich\FileStorage\Rules\FileRule;
-use OZiTAG\Tager\Backend\Core\FormRequest;
+use OZiTAG\Tager\Backend\Core\Http\FormRequest;
 
 class BannerRequest extends FormRequest
 {

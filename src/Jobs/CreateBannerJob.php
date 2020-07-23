@@ -7,8 +7,9 @@ use Ozerich\FileStorage\Repositories\FileRepository;
 use Ozerich\FileStorage\Storage;
 use OZiTAG\Tager\Backend\Banners\Models\TagerBannerArea;
 use OZiTAG\Tager\Backend\Banners\Repositories\BannersRepository;
+use OZiTAG\Tager\Backend\Core\Jobs\Job;
 
-class CreateBannerJob
+class CreateBannerJob extends Job
 {
     private $area;
 

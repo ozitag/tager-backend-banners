@@ -3,7 +3,6 @@
 namespace OZiTAG\Tager\Backend\Banners\Repositories;
 
 use OZiTAG\Tager\Backend\Core\Repositories\EloquentRepository;
-use OZiTAG\Tager\Backend\Mail\Models\TagerMailTemplate;
 use OZiTAG\Tager\Backend\Banners\Models\TagerBannerArea;
 
 class BannerAreasRepository extends EloquentRepository

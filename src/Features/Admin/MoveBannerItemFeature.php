@@ -4,8 +4,7 @@ namespace OZiTAG\Tager\Backend\Banners\Features\Admin;
 
 use OZiTAG\Tager\Backend\Banners\Jobs\GetBannerByIdJob;
 use OZiTAG\Tager\Backend\Banners\Jobs\MoveBannerJob;
-use OZiTAG\Tager\Backend\Banners\Requests\BannerRequest;
-use OZiTAG\Tager\Backend\Core\Feature;
+use OZiTAG\Tager\Backend\Core\Features\Feature;
 use OZiTAG\Tager\Backend\Core\SuccessResource;
 
 class MoveBannerItemFeature extends Feature

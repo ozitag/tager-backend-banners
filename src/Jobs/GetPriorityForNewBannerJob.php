@@ -2,10 +2,10 @@
 
 namespace OZiTAG\Tager\Backend\Banners\Jobs;
 
+use OZiTAG\Tager\Backend\Core\Jobs\Job;
 use OZiTAG\Tager\Backend\Banners\Repositories\BannersRepository;
-use OZiTAG\Tager\Backend\Blog\Repositories\CategoryRepository;
 
-class GetPriorityForNewBannerJob
+class GetPriorityForNewBannerJob extends Job
 {
     private $areaId;
 
