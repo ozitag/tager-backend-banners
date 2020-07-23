@@ -8,7 +8,7 @@ use OZiTAG\Tager\Backend\Banners\Jobs\UpdateBannerJob;
 use OZiTAG\Tager\Backend\Banners\Requests\BannerRequest;
 use OZiTAG\Tager\Backend\Banners\Resources\BannerResource;
 use OZiTAG\Tager\Backend\Core\Features\Feature;
-use OZiTAG\Tager\Backend\Core\SuccessResource;
+use OZiTAG\Tager\Backend\Core\Resources\SuccessResource;
 
 class UpdateBannerItemFeature extends Feature
 {

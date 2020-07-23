@@ -5,7 +5,7 @@ namespace OZiTAG\Tager\Backend\Banners\Features\Admin;
 use Illuminate\Http\Resources\Json\JsonResource;
 use OZiTAG\Tager\Backend\Banners\Jobs\GetBannerByIdJob;
 use OZiTAG\Tager\Backend\Core\Features\Feature;
-use OZiTAG\Tager\Backend\Core\SuccessResource;
+use OZiTAG\Tager\Backend\Core\Resources\SuccessResource;
 use OZiTAG\Tager\Backend\Banners\Jobs\GetBannerAreaByIdJob;
 use OZiTAG\Tager\Backend\Banners\Jobs\RemoveBannerAreaJob;
 

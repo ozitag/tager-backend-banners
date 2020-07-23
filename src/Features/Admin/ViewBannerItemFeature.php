@@ -6,7 +6,7 @@ use OZiTAG\Tager\Backend\Banners\Jobs\GetBannerByIdJob;
 use OZiTAG\Tager\Backend\Banners\Requests\BannerRequest;
 use OZiTAG\Tager\Backend\Banners\Resources\BannerFullResource;
 use OZiTAG\Tager\Backend\Core\Features\Feature;
-use OZiTAG\Tager\Backend\Core\SuccessResource;
+use OZiTAG\Tager\Backend\Core\Resources\SuccessResource;
 
 class ViewBannerItemFeature extends Feature
 {
