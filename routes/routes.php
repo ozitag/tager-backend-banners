@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use OZiTAG\Tager\Backend\Banners\Controllers\AdminController;
 use OZiTAG\Tager\Backend\Banners\Controllers\PublicController;
 
-Route::get('/tager/market-boards/{alias}', [PublicController::class . 'banner']);
+Route::get('/tager/market-boards/{alias}', [PublicController::class, 'banner']);
 
 Route::group(['prefix' => 'admin', 'middleware' => ['passport:administrators', 'auth:api']], function () {
     Route::get('/market-boards', [AdminController::class, 'index']);
