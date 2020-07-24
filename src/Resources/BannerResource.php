@@ -10,6 +10,7 @@ class BannerResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'areaAlias' => $this->area ? $this->area->alias : null,
             'title' => $this->title,
             'text' => $this->text,
             'image' => $this->image ? $this->image->getUrl() : null,
