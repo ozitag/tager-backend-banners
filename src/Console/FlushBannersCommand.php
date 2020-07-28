@@ -3,7 +3,10 @@
 namespace OZiTAG\Tager\Backend\Banners\Console;
 
 use Illuminate\Console\Command;
+use Ozerich\FileStorage\Storage;
 use OZiTAG\Tager\Backend\Banners\Repositories\BannerAreasRepository;
+use OZiTAG\Tager\Backend\Banners\Repositories\BannersRepository;
+use OZiTAG\Tager\Backend\Settings\TagerSettingsConfig;
 
 class FlushBannersCommand extends Command
 {
@@ -21,7 +24,7 @@ class FlushBannersCommand extends Command
      */
     protected $description = 'Sync DB Banner Areas with config';
 
-    public function handle(BannerAreasRepository $repository)
+    public function handle(BannerAreasRepository $repository, BannersRepository $bannersRepository, Storage $storage)
     {
         $areas = config()->get('tager-banners.areas');
         if (!$areas) {
@@ -44,7 +47,13 @@ class FlushBannersCommand extends Command
                 $model->alias = $alias;
             }
 
-            $model->scenario = $scenario;
+            $banners = $bannersRepository->findByBannerArea($model->id);
+            foreach ($banners as $banner) {
+                if ($banner->image_id) {
+                    $storage->setFileScenario($banner->image_id, $scenario);
+                }
+            }
+
             $model->label = $label;
 
             $model->save();
