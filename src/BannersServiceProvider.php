@@ -5,7 +5,7 @@ namespace OZiTAG\Tager\Backend\Banners;
 use Illuminate\Support\ServiceProvider;
 use OZiTAG\Tager\Backend\Banners\Console\FlushBannersCommand;
 
-class TagerBackendBannersServiceProvider extends ServiceProvider
+class BannersServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
