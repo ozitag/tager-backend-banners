@@ -28,8 +28,10 @@ class FlushBannersCommand extends Command
     {
         $areas = config()->get('tager-banners.areas');
         if (!$areas) {
-            return;
+            $areas = [];
         }
+
+        $exists = [];
 
         foreach ($areas as $alias => $area) {
             if (is_string($area)) {
@@ -57,6 +59,14 @@ class FlushBannersCommand extends Command
             $model->label = $label;
 
             $model->save();
+
+            $exists[] = $model->id;
+        }
+
+        foreach ($repository->all() as $bannerArea) {
+            if (!in_array($bannerArea->id, $exists)) {
+                $bannerArea->delete();
+            }
         }
     }
 }
