@@ -1,24 +1,33 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use OZiTAG\Tager\Backend\Banners\Controllers\AdminController;
-use OZiTAG\Tager\Backend\Banners\Controllers\PublicController;
+use OZiTAG\Tager\Backend\Banners\Admin\Banners\BannersController;
+use OZiTAG\Tager\Backend\Banners\Admin\BannerZones\BannerZonesController;
+use OZiTAG\Tager\Backend\Banners\Enums\TagerBannersScope;
+use OZiTAG\Tager\Backend\Banners\Web\BannersController as WebBannersController;
+use OZiTAG\Tager\Backend\Rbac\Facades\AccessControlMiddleware;
 
-Route::get('/tager/market-boards/{alias}', [PublicController::class, 'banner']);
+Route::group(['prefix' => 'admin/banners', 'middleware' => ['passport:administrators', 'auth:api']], function () {
+    Route::get('/zones', [BannerZonesController::class, 'index']);
 
-Route::group(['prefix' => 'admin', 'middleware' => ['passport:administrators', 'auth:api']], function () {
-    Route::get('/market-boards', [AdminController::class, 'index']);
-    Route::post('/market-boards', [AdminController::class, 'create']);
-    Route::get('/market-boards/{id}', [AdminController::class, 'view']);
-    Route::get('/market-boards/{alias}', [AdminController::class, 'viewByAlias']);
-    Route::put('/market-boards/{id}', [AdminController::class, 'update']);
-    Route::delete('/market-boards/{id}', [AdminController::class, 'delete']);
+    Route::group(['middleware' => [AccessControlMiddleware::scopes(TagerBannersScope::View)]], function () {
+        Route::get('/', [BannersController::class, 'index']);
+        Route::get('/count', [BannersController::class, 'index']);
+        Route::get('/{id}', [BannersController::class, 'view']);
 
-    Route::get('/market-boards/{id}/items', [AdminController::class, 'listItems']);
-    Route::post('/market-boards/{id}/items', [AdminController::class, 'createItem']);
-    Route::get('/market-boards/items/{id}', [AdminController::class, 'viewItem']);
-    Route::put('/market-boards/items/{id}', [AdminController::class, 'updateItem']);
-    Route::delete('/market-boards/items/{id}', [AdminController::class, 'removeItem']);
-    Route::post('/market-boards/items/{id}/{direction}', [AdminController::class, 'moveItem'])
-        ->where('direction', 'up|down');
+        Route::post('/', [BannersController::class, 'store'])->middleware([
+            AccessControlMiddleware::scopes(TagerBannersScope::Create)
+        ]);
+
+        Route::group(['middleware' => [AccessControlMiddleware::scopes(TagerBannersScope::Edit)]], function () {
+            Route::post('/move/{id}/{direction}', [BannersController::class, 'move'])->where('direction', 'up|down');
+            Route::put('/{id}', [BannersController::class, 'update']);
+        });
+
+        Route::delete('/{id}', [BannersController::class, 'delete'])->middleware([
+            AccessControlMiddleware::scopes(TagerBannersScope::Delete)
+        ]);
+    });
 });
+
+Route::get('/tager/banners/{zone}', [WebBannersController::class, 'view']);

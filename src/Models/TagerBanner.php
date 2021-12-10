@@ -2,15 +2,30 @@
 
 namespace OZiTAG\Tager\Backend\Banners\Models;
 
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Ozerich\FileStorage\Models\File;
+use OZiTAG\Tager\Backend\Core\Models\TModel;
+use OZiTAG\Tager\Backend\Crud\Contracts\IModelPriorityConditional;
 
-class TagerBanner extends Model
+/**
+ * @property string $banner_zone
+ * @property integer $priority
+ * @property integer $image_id
+ * @property string $link
+ * @property boolean $open_new_tab
+ * @property integer $status
+ * @property boolean $disabled
+ * @property string $start_at
+ * @property string $finish_at
+ *
+ * @property File $image
+ */
+class TagerBanner extends TModel implements IModelPriorityConditional
 {
     public $timestamps = false;
 
     protected $table = 'tager_banners';
+
+    static $defaultOrder = 'status ASC, priority ASC';
 
     /**
      * The attributes that are mass assignable.
@@ -18,32 +33,19 @@ class TagerBanner extends Model
      * @var array
      */
     protected $fillable = [
-        'priority',
-        'banner_area_id',
-        'title',
-        'text',
-        'image_id',
-        'button_label',
-        'button_link',
-        'button_is_new_tab',
+        'banner_zone', 'priority', 'image_id', 'link', 'open_new_tab', 'status', 'disabled',
+        'start_at', 'end_at'
     ];
-
-    public function area()
-    {
-        return $this->belongsTo(TagerBannerArea::class, 'banner_area_id');
-    }
 
     public function image()
     {
         return $this->belongsTo(File::class, 'image_id');
     }
 
-    protected static function boot()
+    public function getPriorityConditionalAttributes()
     {
-        parent::boot();
-
-        static::addGlobalScope('order', function (Builder $builder) {
-            $builder->orderBy('priority', 'asc');
-        });
+        return [
+            'banner_zone'
+        ];
     }
 }

@@ -3,20 +3,11 @@
 namespace OZiTAG\Tager\Backend\Banners;
 
 use Illuminate\Support\ServiceProvider;
-use OZiTAG\Tager\Backend\Banners\Console\FlushBannersCommand;
+use OZiTAG\Tager\Backend\Banners\Enums\TagerBannersScope;
+use OZiTAG\Tager\Backend\Rbac\TagerScopes;
 
 class BannersServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-
-    }
-
     /**
      * Bootstrap any application services.
      *
@@ -24,18 +15,17 @@ class BannersServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadRoutesFrom(__DIR__ . '/../routes/routes.php');
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'tager-banners');
 
         $this->loadMigrationsFrom(__DIR__ . '/../migrations');
 
-        $this->publishes([
-            __DIR__ . '/../config.php' => config_path('tager-banners.php'),
-        ]);
+        $this->loadRoutesFrom(__DIR__ . '/../routes/routes.php');
 
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-                FlushBannersCommand::class,
-            ]);
-        }
+        TagerScopes::registerGroup(__('tager-banners::scopes.group'), [
+            TagerBannersScope::View => __('tager-banners::scopes.view'),
+            TagerBannersScope::Create => __('tager-banners::scopes.create'),
+            TagerBannersScope::Edit => __('tager-banners::scopes.edit'),
+            TagerBannersScope::Delete => __('tager-banners::scopes.delete'),
+        ]);
     }
 }
