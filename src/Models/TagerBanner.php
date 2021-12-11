@@ -16,6 +16,7 @@ use OZiTAG\Tager\Backend\Crud\Contracts\IModelPriorityConditional;
  * @property boolean $disabled
  * @property string $start_at
  * @property string $finish_at
+ * @property string $comment
  *
  * @property File $image
  */
@@ -34,7 +35,7 @@ class TagerBanner extends TModel implements IModelPriorityConditional
      */
     protected $fillable = [
         'banner_zone', 'priority', 'image_id', 'link', 'open_new_tab', 'status', 'disabled',
-        'start_at', 'end_at'
+        'start_at', 'finish_at', 'comment'
     ];
 
     public function image()

@@ -12,7 +12,7 @@ Route::group(['prefix' => 'admin/banners', 'middleware' => ['passport:administra
 
     Route::group(['middleware' => [AccessControlMiddleware::scopes(TagerBannersScope::View)]], function () {
         Route::get('/', [BannersController::class, 'index']);
-        Route::get('/count', [BannersController::class, 'index']);
+        Route::get('/count', [BannersController::class, 'count']);
         Route::get('/{id}', [BannersController::class, 'view']);
 
         Route::post('/', [BannersController::class, 'store'])->middleware([

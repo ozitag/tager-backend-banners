@@ -2,6 +2,8 @@
 
 namespace OZiTAG\Tager\Backend\Banners\Admin\Banners;
 
+use OZiTAG\Tager\Backend\Banners\Enums\TagerBannersStatus;
+use OZiTAG\Tager\Backend\Banners\Models\TagerBanner;
 use OZiTAG\Tager\Backend\Banners\Repositories\BannersRepository;
 use OZiTAG\Tager\Backend\Crud\Actions\IndexAction;
 use OZiTAG\Tager\Backend\Crud\Actions\StoreOrUpdateAction;
@@ -18,18 +20,31 @@ class BannersController extends AdminCrudController
         $this->setIndexAction((new IndexAction())->enablePagination());
 
         $this->setResourceFields([
-            'id', 'status', 'banner_zone',
+            'id',
+            'bannerZone' => 'banner_zone',
+            'status' => function (TagerBanner $banner) {
+                if ($banner->disabled) {
+                    return 'DISABLED';
+                } else {
+                    return TagerBannersStatus::getPublicValue($banner->status);
+                }
+            },
             'image' => 'image:file:url',
-            'link',
-            'open_new_tab:bool', 'disabled:bool',
+            'link', 'openNewTab' => 'open_new_tab:bool',
+            'dateStart' => 'start_at:date',
+            'dateEnd' => 'end_at:date',
             'comment'
         ]);
 
         $this->setFullResourceFields([
-            'id', 'status', 'banner_zone',
+            'id', 'status' => function (TagerBanner $banner) {
+                return TagerBannersStatus::getPublicValue($banner->status);
+            }, 'bannerZone' => 'banner_zone',
             'image' => 'image:file:model',
-            'link',
-            'open_new_tab:bool', 'disabled:bool',
+            'link', 'openNewTab' => 'open_new_tab:bool',
+            'disabled:bool',
+            'dateStart' => 'start_at:date',
+            'dateEnd' => 'end_at:date',
             'comment'
         ]);
 

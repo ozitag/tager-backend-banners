@@ -3,6 +3,7 @@
 namespace OZiTAG\Tager\Backend\Banners\Admin\Banners;
 
 use Ozerich\FileStorage\Storage;
+use OZiTAG\Tager\Backend\Banners\Enums\TagerBannersStatus;
 use OZiTAG\Tager\Backend\Banners\Jobs\UpdateBannerStatusJob;
 use OZiTAG\Tager\Backend\Banners\Models\TagerBanner;
 use OZiTAG\Tager\Backend\Banners\Repositories\BannersRepository;
@@ -14,7 +15,7 @@ class BannerCreateOrUpdateOperation extends Operation
 
     protected BannerRequest $request;
 
-    public function __construct(?TagerBanner $model, BannerRequest $request)
+    public function __construct(BannerRequest $request, ?TagerBanner $model = null)
     {
         $this->model = $model;
 
@@ -50,6 +51,7 @@ class BannerCreateOrUpdateOperation extends Operation
             'finish_at' => $this->request->finishAt,
             'disabled' => $this->request->disabled,
             'comment' => $this->request->comment,
+            'status' => TagerBannersStatus::Waiting
         ]);
 
         return $this->run(UpdateBannerStatusJob::class, [
