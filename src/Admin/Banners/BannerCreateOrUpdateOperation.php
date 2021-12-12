@@ -47,8 +47,8 @@ class BannerCreateOrUpdateOperation extends Operation
             'link' => $this->request->link,
             'image_id' => Storage::fromUUIDtoId($this->request->image),
             'open_new_tab' => $this->request->openNewTab,
-            'start_at' => $this->request->startAt,
-            'finish_at' => $this->request->finishAt,
+            'start_at' => $this->request->dateStart,
+            'finish_at' => $this->request->dateEnd,
             'disabled' => $this->request->disabled,
             'comment' => $this->request->comment,
             'status' => TagerBannersStatus::Waiting
