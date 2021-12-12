@@ -2,6 +2,7 @@
 
 namespace OZiTAG\Tager\Backend\Banners\Admin\BannerZones;
 
+use Illuminate\Http\Resources\Json\JsonResource;
 use OZiTAG\Tager\Backend\Banners\Repositories\BannersRepository;
 use OZiTAG\Tager\Backend\Banners\TagerBanners;
 use OZiTAG\Tager\Backend\Core\Features\Feature;
@@ -21,6 +22,6 @@ class BannerZonesIndexFeature extends Feature
             ];
         }
 
-        return $response;
+        return new JsonResource($response);
     }
 }
