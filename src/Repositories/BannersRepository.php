@@ -25,6 +25,11 @@ class BannersRepository extends EloquentRepository implements IRepositoryWithPri
         return $this->builder()->where('banner_zone', '=', $zoneName);
     }
 
+    public function queryForStatus(TagerBannersStatus $status): Builder
+    {
+        return $this->builder()->where('status', '=', $status);
+    }
+
     public function searchByQuery(?string $query, Builder $builder = null): ?Builder
     {
         $builder = $builder ? $builder : $this->model;

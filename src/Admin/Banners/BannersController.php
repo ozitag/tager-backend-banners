@@ -26,7 +26,7 @@ class BannersController extends AdminCrudController
                 if ($banner->disabled) {
                     return 'DISABLED';
                 } else {
-                    return TagerBannersStatus::getPublicValue($banner->status);
+                    return TagerBannersStatus::getPublicValue(TagerBannersStatus::from($banner->status));
                 }
             },
             'image' => 'image:file:url',
@@ -38,7 +38,7 @@ class BannersController extends AdminCrudController
 
         $this->setFullResourceFields([
             'id', 'status' => function (TagerBanner $banner) {
-                return TagerBannersStatus::getPublicValue($banner->status);
+                return TagerBannersStatus::getPublicValue(TagerBannersStatus::from($banner->status));
             }, 'bannerZone' => 'banner_zone',
             'image' => 'image:file:model',
             'link', 'openNewTab' => 'open_new_tab:bool',

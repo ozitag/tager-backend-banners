@@ -3,11 +3,19 @@
 namespace OZiTAG\Tager\Backend\Banners;
 
 use Illuminate\Support\ServiceProvider;
+use OZiTAG\Tager\Backend\Banners\Console\TagerBannersUpdateStatusesCommand;
 use OZiTAG\Tager\Backend\Banners\Enums\TagerBannersScope;
 use OZiTAG\Tager\Backend\Rbac\TagerScopes;
 
 class BannersServiceProvider extends ServiceProvider
 {
+    public function register()
+    {
+        $this->commands([
+            TagerBannersUpdateStatusesCommand::class
+        ]);
+    }
+
     /**
      * Bootstrap any application services.
      *
@@ -27,5 +35,9 @@ class BannersServiceProvider extends ServiceProvider
             TagerBannersScope::Edit => __('tager-banners::scopes.edit'),
             TagerBannersScope::Delete => __('tager-banners::scopes.delete'),
         ]);
+
+        $this->callAfterResolving(Schedule::class, function (Schedule $schedule) {
+            $schedule->command('cron:tager-banners:update-statuses')->daily();
+        });
     }
 }

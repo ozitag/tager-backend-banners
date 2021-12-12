@@ -29,7 +29,7 @@ class UpdateBannerStatusJob extends Job
         }
 
         return $bannersRepository->set($this->model)->fillAndSave([
-            'status' => $status
+            'status' => $status->value
         ]);
     }
 }

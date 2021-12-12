@@ -2,13 +2,13 @@
 
 namespace OZiTAG\Tager\Backend\Banners\Enums;
 
-enum TagerBannersStatus
+enum TagerBannersStatus: int
 {
-    const Active = '0';
-    const Waiting = '1';
-    const Archived = '2';
+    case Active = 0;
+    case Waiting = 1;
+    case Archived = 2;
 
-    public static function getPublicValue(string $value): ?string
+    public static function getPublicValue(self $value): ?string
     {
         switch ($value) {
             case self::Active:
@@ -22,15 +22,15 @@ enum TagerBannersStatus
         }
     }
 
-    public static function fromPublicValue(string $publicValue): ?string
+    public static function fromPublicValue(string $publicValue): ?self
     {
         switch ($publicValue) {
             case 'ACTIVE':
-                return self::Active;
+                return self::from(self::Active);
             case 'WAITING':
-                return self::Waiting;
+                return self::from(self::Waiting);
             case 'ARCHIVED':
-                return self::Archived;
+                return self::from(self::Archived);
             default:
                 return null;
         }
