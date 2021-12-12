@@ -26,11 +26,11 @@ enum TagerBannersStatus: int
     {
         switch ($publicValue) {
             case 'ACTIVE':
-                return self::from(self::Active);
+                return self::from(self::Active->value);
             case 'WAITING':
-                return self::from(self::Waiting);
+                return self::from(self::Waiting->value);
             case 'ARCHIVED':
-                return self::from(self::Archived);
+                return self::from(self::Archived->value);
             default:
                 return null;
         }
