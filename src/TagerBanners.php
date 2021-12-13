@@ -28,4 +28,9 @@ class TagerBanners
     {
         return self::$bannerZones;
     }
+
+    public static function isBannerZoneExists(string $zoneName): ?bool
+    {
+        return isset(self::$bannerZones[$zoneName]);
+    }
 }

@@ -30,4 +30,4 @@ Route::group(['prefix' => 'admin/adv', 'middleware' => ['passport:administrators
     });
 });
 
-Route::get('/tager/banners/{zone}', [WebBannersController::class, 'view']);
+Route::get('/tager/adv/{zone}', [WebBannersController::class, 'view']);
