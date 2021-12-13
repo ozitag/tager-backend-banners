@@ -32,7 +32,7 @@ class BannersController extends AdminCrudController
             'image' => 'image:file:url',
             'link', 'openNewTab' => 'open_new_tab:bool',
             'dateStart' => 'start_at:date',
-            'dateEnd' => 'end_at:date',
+            'dateEnd' => 'finish_at:date',
             'comment'
         ]);
 
@@ -44,7 +44,7 @@ class BannersController extends AdminCrudController
             'link', 'openNewTab' => 'open_new_tab:bool',
             'disabled:bool',
             'dateStart' => 'start_at:date',
-            'dateEnd' => 'end_at:date',
+            'dateEnd' => 'finish_at:date',
             'comment'
         ]);
 
