@@ -21,7 +21,7 @@ class BannerResource extends JsonResource
 
         return [
             'link' => $model->link,
-            'openNewTab' => $model->open_new_tab,
+            'openNewTab' => boolval($model->open_new_tab),
             'image' => $model->image ? $model->image->getFullJson() : null
         ];
     }
