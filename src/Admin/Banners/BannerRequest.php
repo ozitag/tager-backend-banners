@@ -17,6 +17,7 @@ use OZiTAG\Tager\Backend\Validation\Rule;
  * @property string $dateEnd
  * @property string $comment
  * @property int $priority
+ * @property array $fields
  */
 class BannerRequest extends CrudFormRequest
 {
@@ -31,7 +32,10 @@ class BannerRequest extends CrudFormRequest
             'dateStart' => ['nullable', 'date'],
             'dateEnd' => ['nullable', 'date'],
             'comment' => ['nullable', 'string'],
-            'priority' => ['nullable', 'number'],
+            'priority' => ['nullable', 'integer'],
+            'fields' => ['nullable', 'array'],
+            'fields.*.name' => ['required', 'string'],
+            'fields.*.value' => ['present', 'nullable'],
         ];
     }
 }

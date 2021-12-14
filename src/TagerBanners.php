@@ -2,11 +2,13 @@
 
 namespace OZiTAG\Tager\Backend\Banners;
 
+use OZiTAG\Tager\Backend\Fields\Base\Field;
+
 class TagerBanners
 {
     private static array $bannerZones = [];
 
-    public static function registerBannerZone(string $systemName, string $name, ?string $fileScenario)
+    public static function registerBannerZone(string $systemName, string $name, ?string $fileScenario, ?array $additionalFields = [])
     {
         if (isset(self::$bannerZones[$systemName])) {
             throw new \Exception('Banner Zone with name "' . $systemName . '" already exists');
@@ -15,8 +17,27 @@ class TagerBanners
         self::$bannerZones[$systemName] = [
             'systemName' => $systemName,
             'name' => $name,
-            'fileScenario' => $fileScenario
+            'fileScenario' => $fileScenario,
+            'additionalFields' => $additionalFields
         ];
+    }
+
+    /**
+     * @return Field[]
+     */
+    public static function getBannerZoneFields(string $zone): array
+    {
+        $bannerZone = self::getBannerZone($zone);
+        if (!$bannerZone) {
+            return [];
+        }
+
+        $fields = [];
+        foreach ($bannerZone['additionalFields'] as $name => $additionalField) {
+            $fields[] = $additionalField->setName($name);
+        }
+
+        return $fields;
     }
 
     public static function getBannerZoneIds(): array
@@ -32,5 +53,10 @@ class TagerBanners
     public static function isBannerZoneExists(string $zoneName): ?bool
     {
         return isset(self::$bannerZones[$zoneName]);
+    }
+
+    public static function getBannerZone(string $zoneName): ?array
+    {
+        return self::$bannerZones[$zoneName] ?? null;
     }
 }

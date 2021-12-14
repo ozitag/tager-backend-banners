@@ -46,7 +46,10 @@ class BannersController extends AdminCrudController
             'disabled:bool',
             'dateStart' => 'start_at:date',
             'dateEnd' => 'finish_at:date',
-            'comment'
+            'comment',
+            'fields' => function (TagerBanner $banner) {
+                return $banner->getFieldsAdminJson();
+            }
         ]);
 
         $this->setStoreAndUpdateAction(new StoreOrUpdateAction(

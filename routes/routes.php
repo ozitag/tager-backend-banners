@@ -9,6 +9,7 @@ use OZiTAG\Tager\Backend\Rbac\Facades\AccessControlMiddleware;
 
 Route::group(['prefix' => 'admin/adv', 'middleware' => ['passport:administrators', 'auth:api']], function () {
     Route::get('/zones', [BannerZonesController::class, 'index']);
+    Route::get('/zones/{name}', [BannerZonesController::class, 'view']);
 
     Route::group(['middleware' => [AccessControlMiddleware::scopes(TagerBannersScope::View)]], function () {
         Route::get('/', [BannersController::class, 'index']);

@@ -47,8 +47,15 @@ class BannerCreateOrUpdateOperation extends Operation
             'status' => TagerBannersStatus::Waiting
         ]);
 
-        return $this->run(UpdateBannerStatusJob::class, [
+        $model = $this->run(ProcessBannerFieldsJob::class, [
+            'model' => $model,
+            'fields' => $this->request->fields
+        ]);
+
+        $model = $this->run(UpdateBannerStatusJob::class, [
             'model' => $model
         ]);
+
+        return $model;
     }
 }

@@ -18,7 +18,7 @@ class BannerZonesIndexFeature extends Feature
             $response[] = [
                 'id' => $bannerZone['systemName'],
                 'name' => $bannerZone['name'],
-                'bannersCount' => $bannersRepository->queryForZone($bannerZone['systemName'])->count()
+                'bannersCount' => $bannersRepository->queryForZone($bannerZone['systemName'])->count(),
             ];
         }
 
