@@ -18,11 +18,11 @@ class ProcessBannerFieldsJob extends Job
 
     protected array $fields;
 
-    public function __construct(TagerBanner $model, array $fields)
+    public function __construct(TagerBanner $model, ?array $fields = null)
     {
         $this->model = $model;
 
-        $this->fields = $fields;
+        $this->fields = $fields ?: [];
     }
 
     public function handle(BannersFieldsRepository $bannersFieldsRepository)
