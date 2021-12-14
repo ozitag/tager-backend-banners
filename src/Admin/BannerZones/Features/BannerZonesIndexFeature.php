@@ -1,6 +1,6 @@
 <?php
 
-namespace OZiTAG\Tager\Backend\Banners\Admin\BannerZones;
+namespace OZiTAG\Tager\Backend\Banners\Admin\BannerZones\Features;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use OZiTAG\Tager\Backend\Banners\Repositories\BannersRepository;
