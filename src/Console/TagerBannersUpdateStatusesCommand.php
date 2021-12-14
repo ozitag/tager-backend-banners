@@ -30,8 +30,22 @@ class TagerBannersUpdateStatusesCommand extends Command
             $banner = $this->runJob(UpdateBannerStatusJob::class, [
                 'model' => $banner
             ]);
+        }
 
-            $this->log(TagerBannersStatus::getPublicValue($banner->status));
+        /** @var TagerBanner[] $banners */
+        $banners = $repository->queryForStatus(TagerBannersStatus::Active)->get();
+
+        $this->log('Found ' . count($banners) . ' active banners');
+
+        foreach ($banners as $ind => $banner) {
+            $this->log('Banner ' . ($ind + 1) . '/' . count($banners) . ': ', false);
+
+            /** @var TagerBanner $banner */
+            $banner = $this->runJob(UpdateBannerStatusJob::class, [
+                'model' => $banner
+            ]);
+
+            $this->log(TagerBannersStatus::getPublicValue(TagerBannersStatus::from($banner->status)));
         }
     }
 }
