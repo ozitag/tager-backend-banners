@@ -30,6 +30,8 @@ class TagerBannersUpdateStatusesCommand extends Command
             $banner = $this->runJob(UpdateBannerStatusJob::class, [
                 'model' => $banner
             ]);
+
+            $this->log(TagerBannersStatus::getPublicValue(TagerBannersStatus::from($banner->status)));
         }
 
         /** @var TagerBanner[] $banners */
