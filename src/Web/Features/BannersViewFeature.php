@@ -4,16 +4,13 @@ namespace OZiTAG\Tager\Backend\Banners\Web\Features;
 
 use Http\Client\Common\Exception\ServerErrorException;
 use Illuminate\Http\Resources\Json\JsonResource;
-use OZiTAG\Tager\Backend\Auth\Http\Resources\AuthLogResource;
 use OZiTAG\Tager\Backend\Banners\Enums\TagerBannersStatus;
 use OZiTAG\Tager\Backend\Banners\Repositories\BannersRepository;
 use OZiTAG\Tager\Backend\Banners\TagerBanners;
 use OZiTAG\Tager\Backend\Banners\Web\Requests\BannersViewRequest;
 use OZiTAG\Tager\Backend\Banners\Web\Resources\BannerResource;
 use OZiTAG\Tager\Backend\Core\Features\Feature;
-use OZiTAG\Tager\Backend\Core\Resources\ResourceCollection;
-use OZiTAG\Tager\Backend\Core\Resources\SuccessResource;
-use OZiTAG\Tager\Backend\Crud\Resources\ModelResource;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class BannersViewFeature extends Feature
 {
@@ -27,12 +24,15 @@ class BannersViewFeature extends Feature
     public function handle(BannersViewRequest $request, BannersRepository $bannersRepository)
     {
         if (TagerBanners::isBannerZoneExists($this->zone) == false) {
-            throw new ServerErrorException('Zone not found');
+            throw new NotFoundHttpException('Zone not found');
         }
 
-        $limit = intval($request->limit) ?? 11111;
+        $limit = intval($request->limit) ?? 100000;
 
-        $query = $bannersRepository->builder()->where('status', TagerBannersStatus::Active)->where('disabled', false);
+        $query = $bannersRepository->queryForZone($this->zone)
+            ->where('status', TagerBannersStatus::Active)
+            ->where('disabled', false);
+
         if ($limit) {
             $query->limit($limit);
         };

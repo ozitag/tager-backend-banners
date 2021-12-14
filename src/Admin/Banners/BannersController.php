@@ -20,7 +20,7 @@ class BannersController extends AdminCrudController
         $this->setIndexAction((new IndexAction())->enablePagination());
 
         $this->setResourceFields([
-            'id',
+            'id', 'priority',
             'bannerZone' => 'banner_zone',
             'status' => function (TagerBanner $banner) {
                 if ($banner->disabled) {
@@ -37,7 +37,8 @@ class BannersController extends AdminCrudController
         ]);
 
         $this->setFullResourceFields([
-            'id', 'status' => function (TagerBanner $banner) {
+            'id', 'priority',
+            'status' => function (TagerBanner $banner) {
                 return TagerBannersStatus::getPublicValue(TagerBannersStatus::from($banner->status));
             }, 'bannerZone' => 'banner_zone',
             'image' => 'image:file:model',

@@ -29,14 +29,7 @@ class BannerCreateOrUpdateOperation extends Operation
         }
 
         if (!$this->request->priority) {
-            if (!$this->model) {
-                $maxPriorityItem = $bannersRepository->findItemWithMaxPriority([
-                    'banner_zone' => $this->request->bannerZone
-                ]);
-                $priority = $maxPriorityItem ? $maxPriorityItem->priority + 1 : 1;
-            } else {
-                $priority = $this->model->priority;
-            }
+            $priority = 1;
         } else {
             $priority = $this->request->priority;
         }

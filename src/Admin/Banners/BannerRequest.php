@@ -13,8 +13,8 @@ use OZiTAG\Tager\Backend\Validation\Rule;
  * @property string $link
  * @property bool $openNewTab
  * @property boolean $disabled
- * @property string $startAt
- * @property string $finishAt
+ * @property string $dateStart
+ * @property string $dateEnd
  * @property string $comment
  * @property int $priority
  */
@@ -28,8 +28,8 @@ class BannerRequest extends CrudFormRequest
             'link' => ['required', 'string'],
             'openNewTab' => ['required', 'boolean'],
             'disabled' => ['required', 'boolean'],
-            'startAt' => ['nullable', 'date'],
-            'finishAt' => ['nullable', 'date'],
+            'dateStart' => ['nullable', 'date'],
+            'dateEnd' => ['nullable', 'date'],
             'comment' => ['nullable', 'string'],
             'priority' => ['nullable', 'number'],
         ];
