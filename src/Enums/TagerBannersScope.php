@@ -2,7 +2,7 @@
 
 namespace OZiTAG\Tager\Backend\Banners\Enums;
 
-enum TagerBannersScope
+enum TagerBannersScope: string
 {
     const View = 'tager-banners.view';
     const Create = 'tager-banners.create';

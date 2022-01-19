@@ -2,24 +2,28 @@
 
 namespace OZiTAG\Tager\Backend\Banners\Console;
 
-use Illuminate\Support\Facades\App;
 use OZiTAG\Tager\Backend\Banners\Enums\TagerBannersStatus;
 use OZiTAG\Tager\Backend\Banners\Jobs\UpdateBannerStatusJob;
 use OZiTAG\Tager\Backend\Banners\Models\TagerBanner;
 use OZiTAG\Tager\Backend\Banners\Repositories\BannersRepository;
-use OZiTAG\Tager\Backend\Core\Console\Command;
+use OZiTAG\Tager\Backend\Cron\Console\CronCommand;
 
-class TagerBannersUpdateStatusesCommand extends Command
+class TagerBannersUpdateStatusesCommand extends CronCommand
 {
     public $signature = 'cron:tager-banners:update-statuses';
 
+    protected BannersRepository $bannersRepository;
+
+    public function __construct(BannersRepository $bannersRepository)
+    {
+        $this->bannersRepository = $bannersRepository;
+        parent::__construct();
+    }
+
     public function handle()
     {
-        /** @var BannersRepository $repository */
-        $repository = App::make(BannersRepository::class);
-
         /** @var TagerBanner[] $banners */
-        $banners = $repository->queryForStatus(TagerBannersStatus::Waiting)->get();
+        $banners = $this->bannersRepository->queryForStatus(TagerBannersStatus::Waiting)->get();
 
         $this->log('Found ' . count($banners) . ' waiting banners');
 
@@ -30,10 +34,12 @@ class TagerBannersUpdateStatusesCommand extends Command
             $banner = $this->runJob(UpdateBannerStatusJob::class, [
                 'model' => $banner
             ]);
+
+            $this->log(TagerBannersStatus::getPublicValue(TagerBannersStatus::from($banner->status)));
         }
 
         /** @var TagerBanner[] $banners */
-        $banners = $repository->queryForStatus(TagerBannersStatus::Active)->get();
+        $banners = $this->bannersRepository->queryForStatus(TagerBannersStatus::Active)->get();
 
         $this->log('Found ' . count($banners) . ' active banners');
 
