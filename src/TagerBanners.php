@@ -2,8 +2,6 @@
 
 namespace OZiTAG\Tager\Backend\Banners;
 
-use OZiTAG\Tager\Backend\Fields\Base\Field;
-
 class TagerBanners
 {
     private static array $bannerZones = [];
@@ -22,9 +20,6 @@ class TagerBanners
         ];
     }
 
-    /**
-     * @return Field[]
-     */
     public static function getBannerZoneFields(string $zone): array
     {
         $bannerZone = self::getBannerZone($zone);

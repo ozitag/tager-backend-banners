@@ -2,7 +2,6 @@
 
 namespace OZiTAG\Tager\Backend\Banners\Web\Resources;
 
-use OZiTAG\Tager\Backend\Administrators\Resources\AdminRoleResource;
 use OZiTAG\Tager\Backend\Banners\Models\TagerBanner;
 use OZiTAG\Tager\Backend\Core\Resources\JsonResource;
 
@@ -22,7 +21,7 @@ class BannerResource extends JsonResource
         return [
             'link' => $model->link,
             'openNewTab' => boolval($model->open_new_tab),
-            'image' => $model->image ? $model->image->getFullJson() : null,
+            'image' => $model->image?->getFullJson(),
             'fields' => $model->getFieldsPublicJson()
         ];
     }

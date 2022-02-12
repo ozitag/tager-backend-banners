@@ -5,7 +5,7 @@ namespace OZiTAG\Tager\Backend\Banners\Admin\Banners;
 use Ozerich\FileStorage\Rules\FileRule;
 use OZiTAG\Tager\Backend\Banners\TagerBanners;
 use OZiTAG\Tager\Backend\Crud\Requests\CrudFormRequest;
-use OZiTAG\Tager\Backend\Validation\Rule;
+use OZiTAG\Tager\Backend\Core\Validation\Rule;
 
 /**
  * @property string $bannerZone

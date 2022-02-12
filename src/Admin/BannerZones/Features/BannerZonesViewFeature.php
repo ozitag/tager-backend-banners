@@ -2,13 +2,11 @@
 
 namespace OZiTAG\Tager\Backend\Banners\Admin\BannerZones\Features;
 
-use OZiTAG\Tager\Backend\Fields\Base\Field;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Http\Resources\Json\JsonResource;
 use OZiTAG\Tager\Backend\Banners\Repositories\BannersRepository;
 use OZiTAG\Tager\Backend\Banners\TagerBanners;
 use OZiTAG\Tager\Backend\Core\Features\Feature;
-use OZiTAG\Tager\Backend\Core\Resources\SuccessResource;
 
 class BannerZonesViewFeature extends Feature
 {

@@ -28,7 +28,7 @@ class TagerBanner extends TModel implements IModelPriorityConditional
 
     protected $table = 'tager_banners';
 
-    static $defaultOrder = 'status ASC, priority DESC';
+    static string $defaultOrder = 'status ASC, priority DESC';
 
     /**
      * The attributes that are mass assignable.

@@ -2,6 +2,7 @@
 
 namespace OZiTAG\Tager\Backend\Banners;
 
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\ServiceProvider;
 use OZiTAG\Tager\Backend\Banners\Console\TagerBannersUpdateStatusesCommand;
 use OZiTAG\Tager\Backend\Banners\Enums\TagerBannersScope;
@@ -30,10 +31,10 @@ class BannersServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__ . '/../routes/routes.php');
 
         TagerScopes::registerGroup(__('tager-banners::scopes.group'), [
-            TagerBannersScope::View => __('tager-banners::scopes.view'),
-            TagerBannersScope::Create => __('tager-banners::scopes.create'),
-            TagerBannersScope::Edit => __('tager-banners::scopes.edit'),
-            TagerBannersScope::Delete => __('tager-banners::scopes.delete'),
+            TagerBannersScope::View->value => __('tager-banners::scopes.view'),
+            TagerBannersScope::Create->value => __('tager-banners::scopes.create'),
+            TagerBannersScope::Edit->value => __('tager-banners::scopes.edit'),
+            TagerBannersScope::Delete->value => __('tager-banners::scopes.delete'),
         ]);
 
         $this->callAfterResolving(Schedule::class, function (Schedule $schedule) {
