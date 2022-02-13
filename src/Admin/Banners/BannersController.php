@@ -57,6 +57,6 @@ class BannersController extends AdminCrudController
             BannerCreateOrUpdateOperation::class
         ));
 
-        $this->setCacheNamespace('tager/banners');
+        $this->setCacheNamespace('tager/adv');
     }
 }
