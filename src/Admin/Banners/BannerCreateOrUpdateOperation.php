@@ -7,6 +7,7 @@ use OZiTAG\Tager\Backend\Banners\Enums\TagerBannersStatus;
 use OZiTAG\Tager\Backend\Banners\Jobs\UpdateBannerStatusJob;
 use OZiTAG\Tager\Backend\Banners\Models\TagerBanner;
 use OZiTAG\Tager\Backend\Banners\Repositories\BannersRepository;
+use OZiTAG\Tager\Backend\Banners\TagerBanners;
 use OZiTAG\Tager\Backend\Core\Jobs\Operation;
 
 class BannerCreateOrUpdateOperation extends Operation
@@ -22,7 +23,7 @@ class BannerCreateOrUpdateOperation extends Operation
         $this->request = $request;
     }
 
-    public function handle(BannersRepository $bannersRepository)
+    public function handle(BannersRepository $bannersRepository, Storage $storage)
     {
         if ($this->model) {
             $bannersRepository->set($this->model);
@@ -32,6 +33,11 @@ class BannerCreateOrUpdateOperation extends Operation
             $priority = 1;
         } else {
             $priority = $this->request->priority;
+        }
+
+        $bannerZone = TagerBanners::getBannerZone($this->request->bannerZone);
+        if ($bannerZone) {
+            $storage->setFileScenario($this->request->image, $bannerZone['fileScenario']);
         }
 
         $model = $bannersRepository->fillAndSave([

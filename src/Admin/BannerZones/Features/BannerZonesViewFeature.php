@@ -34,6 +34,7 @@ class BannerZonesViewFeature extends Feature
         return new JsonResource([
             'id' => $bannerZone['systemName'],
             'name' => $bannerZone['name'],
+            'scenario' => $bannerZone['fileScenario'],
             'bannersCount' => $bannersRepository->queryForZone($bannerZone['systemName'])->count(),
             'fields' =>$fieldsValue
         ]);
