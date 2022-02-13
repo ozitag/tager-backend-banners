@@ -12,7 +12,7 @@ use OZiTAG\Tager\Backend\Crud\Contracts\IModelPriorityConditional;
  * @property integer $priority
  * @property integer $image_id
  * @property string $link
- * @property boolean $open_new_tab
+ * @property integer $open_new_tab
  * @property integer $status
  * @property boolean $disabled
  * @property string $start_at

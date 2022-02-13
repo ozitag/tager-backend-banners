@@ -21,7 +21,9 @@ class BannerResource extends JsonResource
         return [
             'link' => $model->link,
             'openNewTab' => boolval($model->open_new_tab),
-            'image' => $model->image?->getFullJson(),
+            'image' => $model->image?->getFullJson(null, false, false, [
+                'tager-admin-list', 'tager-admin-view'
+            ]),
             'fields' => $model->getFieldsPublicJson()
         ];
     }
