@@ -2,6 +2,7 @@
 
 namespace OZiTAG\Tager\Backend\Banners\Models;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Ozerich\FileStorage\Models\File;
 use OZiTAG\Tager\Backend\Banners\TagerBanners;
 use OZiTAG\Tager\Backend\Core\Models\TModel;
@@ -24,6 +25,8 @@ use OZiTAG\Tager\Backend\Crud\Contracts\IModelPriorityConditional;
  */
 class TagerBanner extends TModel implements IModelPriorityConditional
 {
+    use SoftDeletes;
+
     public $timestamps = false;
 
     protected $table = 'tager_banners';
