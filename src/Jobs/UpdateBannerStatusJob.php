@@ -24,7 +24,7 @@ class UpdateBannerStatusJob extends Job
             $status = TagerBannersStatus::Waiting;
         }
 
-        if ($this->model->finish_at && time() > strtotime($this->model->finish_at)) {
+        if ($this->model->finish_at && time() >= (strtotime($this->model->finish_at) + 86400)) {
             $status = TagerBannersStatus::Archived;
         }
 
