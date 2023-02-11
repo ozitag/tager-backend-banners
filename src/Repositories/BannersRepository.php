@@ -2,7 +2,7 @@
 
 namespace OZiTAG\Tager\Backend\Banners\Repositories;
 
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use OZiTAG\Tager\Backend\Banners\Enums\TagerBannersStatus;
 use OZiTAG\Tager\Backend\Core\Repositories\EloquentRepository;
 use OZiTAG\Tager\Backend\Banners\Models\TagerBanner;
