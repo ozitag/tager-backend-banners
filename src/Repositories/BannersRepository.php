@@ -30,7 +30,7 @@ class BannersRepository extends EloquentRepository implements IRepositoryWithPri
         return $this->builder()->where('status', '=', $status);
     }
 
-    public function searchByQuery(?string $query, Builder $builder = null): ?Builder
+    public function searchByQuery(?string $query, ?Builder $builder = null): ?Builder
     {
         $builder = $builder ? $builder : $this->model;
 
